@@ -1,0 +1,70 @@
+---
+layout: single
+---
+
+<section class="home-card">
+  <h2 class="home-card__title">About</h2>
+  {{ content }}
+</section>
+
+{% if page.skills %}
+<section class="home-card">
+  <h2 class="home-card__title">Skills</h2>
+  {% for group in page.skills %}
+  <div class="skill-row">
+    <div class="skill-row__label">{{ group.category }}</div>
+    <div class="chips">{% for item in group.items %}<span>{{ item }}</span>{% endfor %}</div>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if page.experience %}
+<section class="home-card">
+  <h2 class="home-card__title">Experience</h2>
+  {% for job in page.experience %}
+  <div class="timeline-row">
+    <div class="timeline-row__date">{{ job.period }}</div>
+    <div>
+      <div class="timeline-row__title">{{ job.title }}</div>
+      {% if job.org %}<div class="timeline-row__sub">{{ job.org }}</div>{% endif %}
+      {% if job.details %}<ul>{% for d in job.details %}<li>{{ d }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if page.education %}
+<section class="home-card">
+  <h2 class="home-card__title">Education</h2>
+  {% for edu in page.education %}
+  <div class="timeline-row">
+    <div class="timeline-row__date">{{ edu.period }}</div>
+    <div>
+      <div class="timeline-row__title">{{ edu.school }}</div>
+      {% for degree in edu.degrees %}<div class="timeline-row__sub">{{ degree }}</div>{% endfor %}
+      {% if edu.honors %}<span class="home-badge">{{ edu.honors }}</span>{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section class="home-card">
+  <h2 class="home-card__title">Recent Posts</h2>
+  {% if site.posts.size > 0 %}
+  <div class="home-posts">
+    {% for post in site.posts limit: 3 %}
+    <a class="home-post" href="{{ post.url | relative_url }}">
+      <div class="home-post__date">{{ post.date | date: "%Y.%m.%d" }}</div>
+      <div class="home-post__title">{{ post.title }}</div>
+      {% if post.excerpt %}<div class="home-post__excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  <a class="home-more" href="{{ '/posts/' | relative_url }}">View all posts →</a>
+  {% else %}
+  <p class="home-empty">No posts yet.</p>
+  {% endif %}
+</section>

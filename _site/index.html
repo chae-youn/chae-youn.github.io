@@ -88,11 +88,20 @@
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+
+<!-- light smooth scroll + bounce at page edges -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="/assets/js/scroll-effects.js" defer></script>
+
 <!-- end custom head snippets -->
 
   </head>
 
-  <body class="layout--home" dir="ltr">
+  <body class="layout--home-cards wide" dir="ltr">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -112,7 +121,19 @@
           Chaeyoun&#39;s Blog
           
         </a>
-        <ul class="visible-links"></ul>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/posts/"
+                
+                
+              >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/assets/files/cv.pdf"
+                
+                
+              >CV</a>
+            </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -127,6 +148,8 @@
 
     <div class="initial-content">
       
+
+
 
 
 
@@ -233,13 +256,11 @@
 
       
 
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
+      <!-- CV 버튼: assets/files/cv.pdf 파일을 넣으면 연결돼요 -->
+<li class="author__cv">
+  <a href="/assets/files/cv.pdf" target="_blank" rel="noopener">Download CV</a>
+</li>
+
     </ul>
   </div>
 </div>
@@ -249,46 +270,118 @@
 
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     
-      <h1 id="page-title" class="page__title"></h1>
     
-    <p>Hi there! I’m Chaeyoun, studying AI and brain science. I’m currently a master’s student at Seoul National University in the <a href="https://ccs-lab.github.io/">CCS Lab</a>.</p>
+    
+    
 
-<h2 id="education">Education</h2>
-<ul>
-  <li>[Sep 2024 - Present] Seoul National University
-    <ul>
-      <li>M.S. in Artificial Intelligence</li>
-    </ul>
-  </li>
-  <li>[Mar 2019 - Feb 2024] Ewha Womans University
-    <ul>
-      <li>B.S. in Brain and Cognitive Sciences</li>
-      <li>B.E. in Biomedical Mechanical Engineering</li>
-      <li>Honors: Summa Cum Laude</li>
-    </ul>
-  </li>
-</ul>
+    <div class="page__inner-wrap">
+      
+        <header>
+          
+          
 
 
-<h3 class="archive__subtitle">Recent posts</h3>
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <section class="home-card">
+  <h2 class="home-card__title">About</h2>
+  <!-- Hi, I'm Chaeyoun, studying AI and brain science.  -->
+
+</section>
 
 
-
-
-<div class="entries-list">
+<section class="home-card">
+  <h2 class="home-card__title">Skills</h2>
   
-
-
-
-
-</div>
-
-
-
-
+  <div class="skill-row">
+    <div class="skill-row__label">Languages</div>
+    <div class="chips"><span>Python</span><span>R</span><span>SQL</span></div>
   </div>
+  
+  <div class="skill-row">
+    <div class="skill-row__label">ML / DL</div>
+    <div class="chips"><span>PyTorch</span><span>Tensorflow</span></div>
+  </div>
+  
+</section>
+
+
+
+<section class="home-card">
+  <h2 class="home-card__title">Experience</h2>
+  
+  <div class="timeline-row">
+    <div class="timeline-row__date">Sep 2024 – Aug 2026</div>
+    <div>
+      <div class="timeline-row__title">Master's student in Artificial Intelligence</div>
+      <div class="timeline-row__sub">CCS Lab</div>
+      <ul><li>Project Highway (Inverse reinforcement learning)</li><li>Project Interoception</li></ul>
+    </div>
+  </div>
+  
+</section>
+
+
+
+<section class="home-card">
+  <h2 class="home-card__title">Education</h2>
+  
+  <div class="timeline-row">
+    <div class="timeline-row__date">Sep 2024 – Present</div>
+    <div>
+      <div class="timeline-row__title">Seoul National University</div>
+      <div class="timeline-row__sub">M.S. in Artificial Intelligence</div>
+      
+    </div>
+  </div>
+  
+  <div class="timeline-row">
+    <div class="timeline-row__date">Mar 2019 – Feb 2024</div>
+    <div>
+      <div class="timeline-row__title">Ewha Womans University</div>
+      <div class="timeline-row__sub">B.S. in Brain and Cognitive Sciences</div><div class="timeline-row__sub">B.E. in Biomedical Mechanical Engineering</div>
+      <span class="home-badge">Summa Cum Laude</span>
+    </div>
+  </div>
+  
+</section>
+
+
+<section class="home-card">
+  <h2 class="home-card__title">Recent Posts</h2>
+  
+  <p class="home-empty">No posts yet.</p>
+  
+</section>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
 </div>
 
       
@@ -332,7 +425,7 @@
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2025 <a href="http://localhost:4000">Chaeyoun&#39;s Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Chaeyoun&#39;s Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

@@ -17,11 +17,11 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 # Site Settings
 locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-title                    : "Chaeyoun's Blog"
+title                    : "Chaeyoun Chung"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Chaeyoun"
-description              : "An amazing website."
+name                     : "Chaeyoun Chung"
+description              : "M.S. student in AI at Seoul National University, studying AI and brain science."
 url                      : "https://chae-youn.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -113,15 +113,22 @@ analytics:
 
 # Site Author
 author:
-  name             : "Chaeyoun"
+  name             : "Chaeyoun Chung"
   avatar           : "/assets/images/chaeyoun-chung.jpg"
-  bio              : "Master's student studying AI and brain science."
+  bio              : "M.S. Student in AI<br>Seoul National University"
   location         : "Seoul, South Korea"
   email            :
+  # 아이콘은 url이 있는 항목만 사이드바에 표시돼요. 추가하려면 url 줄의 # 을 지우고 주소를 넣으세요.
   links:
     - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
+      icon: "far fa-fw fa-envelope"
       url: "mailto:chaeyounchung@snu.ac.kr"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      # url: "https://www.linkedin.com/in/"
+    - label: "Google Scholar"
+      icon: "fas fa-fw fa-graduation-cap"
+      # url: "https://scholar.google.com/citations?user="
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -133,7 +140,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/chae-youn"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
