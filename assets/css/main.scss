@@ -354,3 +354,49 @@ html.lenis body {
 .home-empty {
   color: $muted-text-color;
 }
+
+/* PDF posts (_includes/pdf-viewer.html) */
+.pdf-post__page {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.25em;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  -webkit-touch-callout: none; // no long-press save menu on iOS
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.pdf-post__status {
+  font-size: 14px;
+  color: $muted-text-color;
+}
+
+.pdf-post .textLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  line-height: 1;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+
+  span,
+  br {
+    color: transparent;
+    position: absolute;
+    white-space: pre;
+    cursor: text;
+    transform-origin: 0% 0%;
+  }
+
+  // keep selected glyphs invisible too (Chrome otherwise paints them in the highlight text color)
+  ::selection {
+    color: transparent;
+    background: rgba(0, 100, 255, 0.25);
+  }
+}

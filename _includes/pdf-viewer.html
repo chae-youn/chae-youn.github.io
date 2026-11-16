@@ -1,0 +1,90 @@
+<!--
+  Renders a PDF inline as stacked pages (PDF.js), so it reads like a normal post.
+  Usage: set `pdf: /assets/files/xxx.pdf` in a post's front matter.
+  Add `pdf_text: false` to skip the selectable text layer (e.g. handwritten notes with bad OCR).
+-->
+{% assign pdf_url = include.src | relative_url %}
+<div class="pdf-post" data-pdf="{{ pdf_url }}" data-text="{{ include.text }}">
+  <p class="pdf-post__status">PDF 불러오는 중…</p>
+  <noscript><p><a href="{{ pdf_url }}">PDF 열기</a></p></noscript>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function () {
+  var root = document.querySelector('.pdf-post');
+  if (!root || !window.pdfjsLib) return;
+  var status = root.querySelector('.pdf-post__status');
+  // no right-click "save image" on the PDF pages (only on the PDF, rest of the page is unaffected)
+  root.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  pdfjsLib.getDocument(root.dataset.pdf).promise.then(function (pdf) {
+    status.remove();
+    var pages = [];
+
+    function setScale(p) {
+      p.el.style.setProperty('--scale-factor', p.el.clientWidth / p.base.width);
+    }
+
+    function render(p) {
+      p.rendered = true;
+      var dpr = window.devicePixelRatio || 1;
+      var scale = (root.clientWidth / p.base.width) * dpr;
+      var viewport = p.page.getViewport({ scale: scale });
+      var canvas = document.createElement('canvas');
+      canvas.width = Math.floor(viewport.width);
+      canvas.height = Math.floor(viewport.height);
+      p.el.appendChild(canvas);
+      setScale(p); // text layer reads --scale-factor, so set it first
+      p.page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise
+        .then(function () { p.el.classList.add('is-rendered'); });
+
+      // invisible text layer so text can be selected / searched
+      if (root.dataset.text === 'false') return;
+      var text = document.createElement('div');
+      text.className = 'textLayer';
+      p.el.appendChild(text);
+      pdfjsLib.renderTextLayer({
+        textContentSource: p.page.streamTextContent(),
+        container: text,
+        viewport: p.base,
+        textDivs: []
+      });
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var p = pages[e.target.dataset.i];
+        if (!p.rendered) render(p);
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '800px 0px' });
+
+    var chain = Promise.resolve();
+    for (var n = 1; n <= pdf.numPages; n++) {
+      (function (n) {
+        chain = chain.then(function () { return pdf.getPage(n); }).then(function (page) {
+          var base = page.getViewport({ scale: 1 });
+          var el = document.createElement('div');
+          el.className = 'pdf-post__page';
+          el.dataset.i = pages.length;
+          el.style.aspectRatio = base.width + ' / ' + base.height;
+          root.appendChild(el);
+          pages.push({ page: page, base: base, el: el, rendered: false });
+          io.observe(el);
+        });
+      })(n);
+    }
+
+    window.addEventListener('resize', function () {
+      pages.forEach(function (p) { if (p.rendered) setScale(p); });
+    });
+  }).catch(function (err) {
+    status.innerHTML = 'PDF를 불러오지 못했어요. <a href="' + root.dataset.pdf + '">여기서 열기</a>';
+    console.error(err);
+  });
+})();
+</script>
