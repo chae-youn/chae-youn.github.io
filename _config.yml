@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "Chaeyoun Chung"
-  avatar           : "/assets/images/chaeyoun-chung.jpg"
+  avatar           : "/assets/images/ggamja_summer.jpeg"
   bio              : "M.S. Student in AI<br>Seoul National University"
   location         : "Seoul, South Korea"
   email            :
@@ -329,6 +329,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
+      show_date: true
       comments: # true
       share: true
       related: true
